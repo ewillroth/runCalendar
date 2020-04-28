@@ -1,6 +1,6 @@
 export const plans = {
 	'Hansons Beginner': {
-		length: 0,
+		length: 18,
 		name: 'Hansons Beginner',
 		workouts: [
 			`rest`,
@@ -132,7 +132,7 @@ export const plans = {
 		],
 	},
 	'Hansons Advanced': {
-		length: 0,
+		length: 18,
 		name: 'Hansons Advanced',
 		workouts: [
 			'6mi easy',
@@ -264,7 +264,7 @@ export const plans = {
 		],
 	},
 	'Higdon Novice 1': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Novice 1',
 		workouts: [
 			'rest',
@@ -396,7 +396,7 @@ export const plans = {
 		],
 	},
 	'Higdon Novice 2': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Novice 2',
 		workouts: [
 			'Rest',
@@ -528,7 +528,7 @@ export const plans = {
 		],
 	},
 	'Higdon Intermediate 1': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Intermediate 1',
 		workouts: [
 			'Cross',
@@ -660,7 +660,7 @@ export const plans = {
 		],
 	},
 	'Higdon Intermediate 2': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Intermediate 2',
 		workouts: [
 			'Cross',
@@ -792,7 +792,7 @@ export const plans = {
 		],
 	},
 	'Higdon Advanced 1': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Advanced 1',
 		workouts: [
 			'3mi run',
@@ -924,7 +924,7 @@ export const plans = {
 		],
 	},
 	'Higdon Advanced 2': {
-		length: 0,
+		length: 18,
 		name: 'Higdon Advanced 2',
 		workouts: [
 			'3mi run',
@@ -1056,7 +1056,7 @@ export const plans = {
 		],
 	},
 	'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks': {
-		length: 0,
+		length: 18,
 		name: 'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks',
 		workouts: [
 			'Rest or cross-train',
@@ -1188,7 +1188,7 @@ export const plans = {
 		],
 	},
 	'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks': {
-		length: 0,
+		length: 18,
 		name: 'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks',
 		workouts: [
 			'Rest or cross-train',
@@ -1320,7 +1320,7 @@ export const plans = {
 		],
 	},
 	'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks': {
-		length: 0,
+		length: 18,
 		name: 'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks',
 		workouts: [
 			'Recovery 5mi',
@@ -1452,7 +1452,7 @@ export const plans = {
 		],
 	},
 	'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks': {
-		length: 0,
+		length: 12,
 		name: 'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks',
 		workouts: [
 			'Rest or cross-train',
@@ -1542,7 +1542,7 @@ export const plans = {
 		],
 	},
 	'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks': {
-		length: 0,
+		length: 12,
 		name: 'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks',
 		workouts: [
 			'Rest or cross-train',
@@ -1632,7 +1632,7 @@ export const plans = {
 		],
 	},
 	'Hansons Beginner Half Marathon': {
-		length: 0,
+		length: 18,
 		name: 'Hansons Beginner Half Marathon',
 		workouts: [
 			'Rest or cross-train',
@@ -1764,7 +1764,7 @@ export const plans = {
 		],
 	},
 	'Hansons Advanced Half Marathon': {
-		length: 0,
+		length: 18,
 		name: 'Hansons Advanced Half Marathon',
 		workouts: [
 			'Rest or Cross - Train',

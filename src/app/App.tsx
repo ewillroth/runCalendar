@@ -25,6 +25,7 @@ const App = () => {
 		length: 0,
 		workouts: [],
 	});
+
 	return (
 		<MuiPickersUtilsProvider utils={MomentUtils}>
 			<Grid container direction='column' justify='center' alignItems='center'>
