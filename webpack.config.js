@@ -6,16 +6,21 @@ module.exports = {
 	mode: 'development',
 	module: {
 		rules: [
+			{ test: /\.(ts|tsx)$/, use: 'ts-loader' },
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /(node_modules|bower_components)/,
 				loader: 'babel-loader',
 				options: { presets: ['@babel/env'] },
 			},
-			{ test: /\.(ts|tsx)$/, use: 'ts-loader' },
 		],
 	},
-	resolve: { extensions: ['*', '.js', '.jsx', '.ts', '.tsx'] },
+	resolve: {
+		alias: {
+			'react-dom': '@hot-loader/react-dom',
+		},
+		extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+	},
 	output: {
 		path: path.resolve(__dirname, 'dist/'),
 		publicPath: '/dist/',

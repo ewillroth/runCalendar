@@ -1,14 +1,13 @@
 {
 	"presets": [
 		"@babel/preset-react",
-		"@babel/preset-typescript",
-		"react-hot-loader/babel",
 		[
 			"@babel/preset-env",
 			{
 				"useBuiltIns": "entry"
 			}
-		]
+		],
+		"@babel/preset-typescript"
 	],
-	"plugins": []
+	"plugins": ["react-hot-loader/babel"]
 }
