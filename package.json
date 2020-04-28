@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"browserslist": "> 0.25%, not dead",
 	"dependencies": {
+		"@material-ui/core": "^4.9.12",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-hot-loader": "^4.12.20"
