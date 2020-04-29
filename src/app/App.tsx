@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
-import { Grid, Button, AppBar, Modal } from '@material-ui/core';
+import { Grid, Button, AppBar } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Calendar from './Calendar';
 import Options, { IOptions } from './Options';
