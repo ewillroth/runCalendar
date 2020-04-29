@@ -18,11 +18,10 @@ export interface OptionsProps {
 	options: IOptions;
 	setOptions: React.Dispatch<React.SetStateAction<IOptions>>;
 	setWorkouts: React.Dispatch<React.SetStateAction<String[]>>;
-	setCustomPlan: React.Dispatch<React.SetStateAction<IPlan>>;
 	workouts: String[];
 }
 
-const Options = ({ options, setOptions, setWorkouts, setCustomPlan, workouts }: OptionsProps) => {
+const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) => {
 	const { calendarName, startDate, endDate, length, plan } = options;
 
 	const handleNameChange = (e: any) => {
@@ -50,7 +49,7 @@ const Options = ({ options, setOptions, setWorkouts, setCustomPlan, workouts }: 
 			setWorkouts(workouts);
 			setOptions({ ...options, plan: e.target.value, length: length });
 		} else {
-			setCustomPlan({ name: 'Custom', length: length, workouts: workouts });
+			setOptions({ ...options, plan: e.target.value });
 		}
 	};
 
