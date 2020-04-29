@@ -80,7 +80,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 					value={endDate}></DatePicker>
 			</Grid>
 			<Grid item>
-				<TextField size='medium' label='Weeks' value={length} onChange={handleLengthChange} />
+				<TextField style={{ width: '50px' }} size='medium' label='Weeks' value={length} onChange={handleLengthChange} />
 			</Grid>
 			<Grid item>
 				<TextField label='Plan' value={plan} onChange={handlePlanChange} select>

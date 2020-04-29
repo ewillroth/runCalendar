@@ -26,7 +26,7 @@ const Calendar = ({ workouts, startDate, setWorkouts, options, setOptions }: ICa
 		return <Cell index={index} date={date} workout={workout} editWorkout={editWorkout} />;
 	});
 	return (
-		<Grid container spacing={3}>
+		<Grid container spacing={3} justify='center' alignItems='center' style={{ padding: '88px 0' }}>
 			{cells}
 		</Grid>
 	);

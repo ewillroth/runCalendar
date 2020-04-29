@@ -13,7 +13,7 @@ import { Plans } from '../utils/plans';
 
 const App = () => {
 	const [options, setOptions] = useState<IOptions>({
-		calendarName: 'test',
+		calendarName: 'New Calendar',
 		startDate: moment().format(DATE_FORMAT_OPTIONS),
 		endDate: moment().add(24, 'w').format(DATE_FORMAT_OPTIONS),
 		length: 18,
@@ -42,7 +42,7 @@ const App = () => {
 	return (
 		<MuiPickersUtilsProvider utils={MomentUtils}>
 			<Grid container direction='column' justify='center' alignItems='center'>
-				<AppBar color='default'>
+				<AppBar color='default' style={{ padding: '10px 0' }}>
 					<Grid container spacing={10} direction='row' justify='center' alignItems='center'>
 						<Grid item>
 							<Options options={options} setOptions={setOptions} setWorkouts={setWorkouts} workouts={workouts} />
