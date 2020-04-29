@@ -33,4 +33,7 @@ module.exports = {
 		hotOnly: true,
 	},
 	plugins: [new webpack.HotModuleReplacementPlugin()],
+	node: {
+		net: 'empty',
+	},
 };

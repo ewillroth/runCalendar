@@ -1,10 +1,10 @@
-import * as React from 'react';
-import * as moment from 'moment';
+import React from 'react';
+import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
-import { DATE_FORMAT, DATE_INPUT_FORMAT } from '../utils/dateUtils';
-import IPlan from '../utils/IPlan';
-import { getWorkouts, getPlanLength } from '../utils/dataUtils';
+import { DATE_FORMAT_OPTIONS, DATE_FORMAT_INPUT } from '../utils/dateUtils';
+import { getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/dataUtils';
+import { plans } from '../utils/plans';
 
 export interface IOptions {
 	calendarName: string;
@@ -17,8 +17,8 @@ export interface IOptions {
 export interface OptionsProps {
 	options: IOptions;
 	setOptions: React.Dispatch<React.SetStateAction<IOptions>>;
-	setWorkouts: React.Dispatch<React.SetStateAction<String[]>>;
-	workouts: String[];
+	setWorkouts: React.Dispatch<React.SetStateAction<string[]>>;
+	workouts: string[];
 }
 
 const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) => {
@@ -29,25 +29,26 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 	};
 	const handleLengthChange = (e: any) => {
 		const newLength = e.target.value;
-		const newEndDate = moment(startDate).add(newLength, 'weeks').format(DATE_FORMAT);
+		const newEndDate = moment(startDate).add(newLength, 'weeks').format(DATE_FORMAT_OPTIONS);
+		setWorkouts(editWorkoutsLength(workouts, workouts.length, newLength * 7));
 		setOptions({ ...options, plan: 'Custom', length: newLength, endDate: newEndDate });
 	};
 	const handleStartDateChange = (date: any) => {
-		const formattedDate = moment(date).format(DATE_FORMAT);
-		const newEndDate = moment(date).add(length, 'weeks').format(DATE_FORMAT);
+		const formattedDate = moment(date).format(DATE_FORMAT_OPTIONS);
+		const newEndDate = moment(date).add(length, 'weeks').format(DATE_FORMAT_OPTIONS);
 		setOptions({ ...options, startDate: formattedDate, endDate: newEndDate });
 	};
 	const handleEndDateChange = (date: any) => {
-		const formattedDate = moment(date).format(DATE_FORMAT);
-		const newStartDate = moment(date).subtract(length, 'weeks').format(DATE_FORMAT);
+		const formattedDate = moment(date).format(DATE_FORMAT_OPTIONS);
+		const newStartDate = moment(date).subtract(length, 'weeks').format(DATE_FORMAT_OPTIONS);
 		setOptions({ ...options, startDate: newStartDate, endDate: formattedDate });
 	};
 	const handlePlanChange = (e: any) => {
 		if (e.target.value !== 'Custom') {
 			const workouts = getWorkouts(e.target.value);
 			const length = getPlanLength(e.target.value);
-			setWorkouts(workouts);
 			setOptions({ ...options, plan: e.target.value, length: length });
+			setWorkouts(workouts);
 		} else {
 			setOptions({ ...options, plan: e.target.value });
 		}
@@ -61,7 +62,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			<Grid item>
 				<DatePicker
 					label='Start Date'
-					format={DATE_INPUT_FORMAT}
+					format={DATE_FORMAT_INPUT}
 					autoOk
 					disableToolbar
 					variant='inline'
@@ -71,7 +72,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			<Grid item>
 				<DatePicker
 					label='End Date'
-					format={DATE_INPUT_FORMAT}
+					format={DATE_FORMAT_INPUT}
 					autoOk
 					disableToolbar
 					variant='inline'
@@ -83,22 +84,10 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			</Grid>
 			<Grid item>
 				<TextField label='Plan' value={plan} onChange={handlePlanChange} select>
+					{Object.keys(plans).map((plan) => {
+						return <MenuItem value={plan}>{plan}</MenuItem>;
+					})}
 					<MenuItem value='Custom'>Custom</MenuItem>
-					<MenuItem value='Hansons Beginner'>Hansons Beginner</MenuItem>
-					<MenuItem value='Hansons Advanced'>Hansons Advanced</MenuItem>
-					<MenuItem value='Higdon Novice 1'>Higdon Novice 1</MenuItem>
-					<MenuItem value='Higdon Novice 2'>Higdon Novice 2</MenuItem>
-					<MenuItem value='Higdon Intermediate 1'>Higdon Intermediate 1</MenuItem>
-					<MenuItem value='Higdon Intermediate 2'>Higdon Intermediate 2</MenuItem>
-					<MenuItem value='Higdon Advanced 1'>Higdon Advanced 1</MenuItem>
-					<MenuItem value='Higdon Advanced 2'>Higdon Advanced 2</MenuItem>
-					<MenuItem value='Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks'>Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks</MenuItem>
-					<MenuItem value='Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks'>Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks</MenuItem>
-					<MenuItem value='Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks'>Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks</MenuItem>
-					<MenuItem value='Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks'>Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks</MenuItem>
-					<MenuItem value='Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks'>Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks</MenuItem>
-					<MenuItem value='Hansons Beginner Half Marathon'>Hansons Beginner Half Marathon</MenuItem>
-					<MenuItem value='Hansons Advanced Half Marathon'>Hansons Advanced Half Marathon</MenuItem>
 				</TextField>
 			</Grid>
 		</Grid>

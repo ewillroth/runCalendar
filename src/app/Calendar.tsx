@@ -1,19 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import { Grid } from '@material-ui/core';
 import Cell from './Cell';
 import { calculateCellDate } from '../utils/dateUtils';
 import { IOptions } from './Options';
 
 export interface ICalendarProps {
-	workouts: String[];
+	workouts: string[];
 	startDate: string;
-	setWorkouts: React.Dispatch<React.SetStateAction<String[]>>;
+	setWorkouts: React.Dispatch<React.SetStateAction<string[]>>;
 	setOptions: React.Dispatch<React.SetStateAction<IOptions>>;
 	options: IOptions;
-	length: number;
 }
 
-const Calendar = ({ workouts, startDate, setWorkouts, length, options, setOptions }: ICalendarProps) => {
+const Calendar = ({ workouts, startDate, setWorkouts, options, setOptions }: ICalendarProps) => {
 	const editWorkout = (e: any) => {
 		const index = +e.target.name;
 		const newWorkouts = [...workouts];
