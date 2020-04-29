@@ -7,8 +7,7 @@ import { Grid, Button, AppBar } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Calendar from './Calendar';
 import Options, { IOptions } from './Options';
-import { DATE_FORMAT_OPTIONS, DATE_FORMAT_EVENT } from '../utils/dateUtils';
-import { getWorkouts } from '../utils/dataUtils';
+import { DATE_FORMAT_OPTIONS, DATE_FORMAT_EVENT, getWorkouts } from '../utils/utils';
 import { Plans } from '../utils/plans';
 
 const App = () => {

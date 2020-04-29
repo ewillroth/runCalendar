@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
-import { DATE_FORMAT_OPTIONS, DATE_FORMAT_INPUT } from '../utils/dateUtils';
-import { getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/dataUtils';
+import { DATE_FORMAT_OPTIONS, DATE_FORMAT_INPUT, getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/utils';
 import { plans } from '../utils/plans';
 
 export interface IOptions {
@@ -24,11 +23,22 @@ export interface OptionsProps {
 const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) => {
 	const { calendarName, startDate, endDate, length, plan } = options;
 
+	const [name, setName] = useState(calendarName);
+
+	useEffect(() => {
+		setName(calendarName);
+	}, [calendarName]);
+
 	const handleNameChange = (e: any) => {
+		setName(e.target.value);
+	};
+
+	const handleNameBlur = (e: any) => {
 		setOptions({ ...options, calendarName: e.target.value });
 	};
 	const handleLengthChange = (e: any) => {
-		const newLength = e.target.value;
+		let newLength = e.target.value;
+		if (e.target.value > 52) newLength = 52;
 		const newEndDate = moment(startDate).add(newLength, 'weeks').format(DATE_FORMAT_OPTIONS);
 		setWorkouts(editWorkoutsLength(workouts, workouts.length, newLength * 7));
 		setOptions({ ...options, plan: 'Custom', length: newLength, endDate: newEndDate });
@@ -57,7 +67,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 	return (
 		<Grid container spacing={2} direction='row' justify='center' alignItems='flex-start'>
 			<Grid item>
-				<TextField size='medium' label='Calendar Name' value={calendarName} onChange={handleNameChange} />
+				<TextField size='medium' label='Calendar Name' value={name} onChange={handleNameChange} onBlur={handleNameBlur} />
 			</Grid>
 			<Grid item>
 				<DatePicker

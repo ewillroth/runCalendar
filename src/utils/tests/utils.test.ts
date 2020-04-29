@@ -1,5 +1,11 @@
-import { editWorkoutsLength, getPlanLength, getWorkouts } from '../dataUtils';
+import { calculateCellDate, editWorkoutsLength, getPlanLength, getWorkouts } from '../utils';
 import { Plans } from '../plans';
+
+describe('calculateCellDate', () => {
+	it('returns a properly formatted date', () => {
+		expect(calculateCellDate('1990-06-19', 1)).toEqual('Wednesday June 20 1990');
+	});
+});
 
 describe('editWorkoutsLength', () => {
 	it('returns the workouts passed in if the lengths are the same', () => {

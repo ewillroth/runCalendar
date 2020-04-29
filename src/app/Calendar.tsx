@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 import Cell from './Cell';
-import { calculateCellDate } from '../utils/dateUtils';
+import { calculateCellDate } from '../utils/utils';
 import { IOptions } from './Options';
 
 export interface ICalendarProps {
