@@ -7,14 +7,14 @@ import { Grid, Button, AppBar } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import Calendar from './Calendar';
 import Options, { IOptions } from './Options';
-import { DATE_FORMAT_OPTIONS, DATE_FORMAT_EVENT, getWorkouts } from '../utils/utils';
+import { DATE_FORMAT_EVENT, getWorkouts } from '../utils/utils';
 import { Plans } from '../utils/plans';
 
 const App = () => {
 	const [options, setOptions] = useState<IOptions>({
 		calendarName: 'New Calendar',
-		startDate: moment().format(DATE_FORMAT_OPTIONS),
-		endDate: moment().add(24, 'w').format(DATE_FORMAT_OPTIONS),
+		startDate: moment().format(),
+		endDate: moment().add(24, 'w').format(),
 		length: 18,
 		plan: 'Hansons Beginner',
 	});

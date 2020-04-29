@@ -23,7 +23,7 @@ const Calendar = ({ workouts, startDate, setWorkouts, options, setOptions }: ICa
 	const cells = workouts.map((workout: string, i) => {
 		const date = calculateCellDate(startDate, i);
 		const index = i.toString();
-		return <Cell index={index} date={date} workout={workout} editWorkout={editWorkout} />;
+		return <Cell key={date} index={index} date={date} workout={workout} editWorkout={editWorkout} />;
 	});
 	return (
 		<Grid container spacing={3} justify='center' alignItems='center' style={{ padding: '88px 0' }}>

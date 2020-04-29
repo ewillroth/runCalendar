@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
-import { DATE_FORMAT_OPTIONS, DATE_FORMAT_INPUT, getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/utils';
+import { DATE_FORMAT_OPTIONS, getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/utils';
 import { plans } from '../utils/plans';
 
 export interface IOptions {
@@ -39,18 +39,18 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 	const handleLengthChange = (e: any) => {
 		let newLength = e.target.value;
 		if (e.target.value > 52) newLength = 52;
-		const newEndDate = moment(startDate).add(newLength, 'weeks').format(DATE_FORMAT_OPTIONS);
+		const newEndDate = moment(startDate).add(newLength, 'weeks').format();
 		setWorkouts(editWorkoutsLength(workouts, workouts.length, newLength * 7));
 		setOptions({ ...options, plan: 'Custom', length: newLength, endDate: newEndDate });
 	};
 	const handleStartDateChange = (date: any) => {
-		const formattedDate = moment(date).format(DATE_FORMAT_OPTIONS);
-		const newEndDate = moment(date).add(length, 'weeks').format(DATE_FORMAT_OPTIONS);
+		const formattedDate = moment(date).format();
+		const newEndDate = moment(date).add(length, 'weeks').format();
 		setOptions({ ...options, startDate: formattedDate, endDate: newEndDate });
 	};
 	const handleEndDateChange = (date: any) => {
-		const formattedDate = moment(date).format(DATE_FORMAT_OPTIONS);
-		const newStartDate = moment(date).subtract(length, 'weeks').format(DATE_FORMAT_OPTIONS);
+		const formattedDate = moment(date).format();
+		const newStartDate = moment(date).subtract(length, 'weeks').format();
 		setOptions({ ...options, startDate: newStartDate, endDate: formattedDate });
 	};
 	const handlePlanChange = (e: any) => {
@@ -72,7 +72,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			<Grid item>
 				<DatePicker
 					label='Start Date'
-					format={DATE_FORMAT_INPUT}
+					format={DATE_FORMAT_OPTIONS}
 					autoOk
 					disableToolbar
 					variant='inline'
@@ -82,7 +82,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			<Grid item>
 				<DatePicker
 					label='End Date'
-					format={DATE_FORMAT_INPUT}
+					format={DATE_FORMAT_OPTIONS}
 					autoOk
 					disableToolbar
 					variant='inline'
@@ -95,7 +95,11 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			<Grid item>
 				<TextField label='Plan' value={plan} onChange={handlePlanChange} select>
 					{Object.keys(plans).map((plan) => {
-						return <MenuItem value={plan}>{plan}</MenuItem>;
+						return (
+							<MenuItem key={plan} value={plan}>
+								{plan}
+							</MenuItem>
+						);
 					})}
 					<MenuItem value='Custom'>Custom</MenuItem>
 				</TextField>
