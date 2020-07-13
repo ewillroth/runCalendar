@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
+import { makeStyles } from '@material-ui/styles';
 import { DATE_FORMAT_OPTIONS, getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/utils';
 import { plans } from '../utils/plans';
 
@@ -18,12 +19,27 @@ export interface OptionsProps {
 	setOptions: React.Dispatch<React.SetStateAction<IOptions>>;
 	setWorkouts: React.Dispatch<React.SetStateAction<string[]>>;
 	workouts: string[];
+	direction: 'row' | 'column';
 }
 
-const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) => {
+const useStyles = makeStyles({
+	options: {
+		margin: '10px',
+	},
+	lengthInput: {
+		width: '50px',
+	},
+	dateInput: {
+		width: '140px',
+	},
+});
+
+const Options = ({ options, setOptions, setWorkouts, workouts, direction }: OptionsProps) => {
 	const { calendarName, startDate, endDate, length, plan } = options;
 
 	const [name, setName] = useState(calendarName);
+
+	const classes = useStyles();
 
 	useEffect(() => {
 		setName(calendarName);
@@ -65,12 +81,13 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 	};
 
 	return (
-		<Grid container spacing={2} direction='row' justify='center' alignItems='flex-start'>
+		<Grid className={classes.options} container spacing={2} direction={direction} justify='center' alignItems='flex-start'>
 			<Grid item>
 				<TextField size='medium' label='Calendar Name' value={name} onChange={handleNameChange} onBlur={handleNameBlur} />
 			</Grid>
 			<Grid item>
 				<DatePicker
+					className={classes.dateInput}
 					label='Start Date'
 					format={DATE_FORMAT_OPTIONS}
 					autoOk
@@ -81,6 +98,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 			</Grid>
 			<Grid item>
 				<DatePicker
+					className={classes.dateInput}
 					label='End Date'
 					format={DATE_FORMAT_OPTIONS}
 					autoOk
@@ -90,7 +108,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts }: OptionsProps) =
 					value={endDate}></DatePicker>
 			</Grid>
 			<Grid item>
-				<TextField style={{ width: '50px' }} size='medium' label='Weeks' value={length} onChange={handleLengthChange} />
+				<TextField className={classes.lengthInput} size='medium' label='Weeks' value={length} onChange={handleLengthChange} />
 			</Grid>
 			<Grid item>
 				<TextField label='Plan' value={plan} onChange={handlePlanChange} select>

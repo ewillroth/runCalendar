@@ -1,39 +1,35 @@
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
 
-module.exports = {
-	entry: './src/index.tsx',
-	mode: 'development',
+const config = {
+	entry: ['react-hot-loader/patch', './src/index.tsx'],
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'bundle.js',
+	},
 	module: {
 		rules: [
-			{ test: /\.(ts|tsx)$/, use: 'ts-loader' },
 			{
 				test: /\.(js|jsx)$/,
-				exclude: /(node_modules|bower_components)/,
-				loader: 'babel-loader',
-				options: { presets: ['@babel/env'] },
+				use: 'babel-loader',
+				exclude: /node_modules/,
+			},
+			{
+				test: /\.ts(x)?$/,
+				use: ['ts-loader'],
+				exclude: /node_modules/,
 			},
 		],
 	},
 	resolve: {
+		extensions: ['.js', '.jsx', '.tsx', '.ts'],
 		alias: {
 			'react-dom': '@hot-loader/react-dom',
 		},
-		extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist/'),
-		publicPath: '/dist/',
-		filename: 'bundle.js',
 	},
 	devServer: {
-		contentBase: path.join(__dirname, 'public/'),
-		port: 3000,
-		publicPath: 'http://localhost:3000/dist/',
-		hotOnly: true,
-	},
-	plugins: [new webpack.HotModuleReplacementPlugin()],
-	node: {
-		net: 'empty',
+		contentBase: './dist',
 	},
 };
+
+module.exports = config;
