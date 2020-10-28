@@ -11,6 +11,13 @@ const config = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			favicon: './public/runner.svg',
+			templateContent: `
+				<html>
+				<body>
+					<div id="root"></div>
+				</body>
+				</html>
+			`,
 		}),
 	],
 	module: {
