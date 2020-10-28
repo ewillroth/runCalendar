@@ -7,6 +7,11 @@ const config = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',
 	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			favicon: './public/runner.svg',
+		}),
+	],
 	module: {
 		rules: [
 			{
