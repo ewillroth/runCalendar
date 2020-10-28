@@ -1,24 +1,24 @@
 export enum Plans {
-	'Hansons Beginner' = 'Hansons Beginner',
-	'Hansons Advanced' = 'Hansons Advanced',
-	'Higdon Novice 1' = 'Higdon Novice 1',
-	'Higdon Novice 2' = 'Higdon Novice 2',
-	'Higdon Intermediate 1' = 'Higdon Intermediate 1',
-	'Higdon Intermediate 2' = 'Higdon Intermediate 2',
-	'Higdon Advanced 1' = 'Higdon Advanced 1',
-	'Higdon Advanced 2' = 'Higdon Advanced 2',
-	'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks' = 'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks',
-	'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks' = 'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks',
-	'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks' = 'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks',
-	'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks' = 'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks',
-	'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks' = 'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks',
-	'Hansons Beginner Half Marathon' = 'Hansons Beginner Half Marathon',
-	'Hansons Advanced Half Marathon' = 'Hansons Advanced Half Marathon',
-	'JenReviews, 6 months' = 'JenReviews, 6 months',
+	'Hansons Beginner' = 'Hansons Beginner - 18 weeks',
+	'Hansons Advanced' = 'Hansons Advanced - 18 weeks',
+	'Higdon Novice 1' = 'Higdon Novice 1 - 18 weeks',
+	'Higdon Novice 2' = 'Higdon Novice 2 - 18 weeks',
+	'Higdon Intermediate 1' = 'Higdon Intermediate 1 - 18 weeks',
+	'Higdon Intermediate 2' = 'Higdon Intermediate 2 - 18 weeks',
+	'Higdon Advanced 1' = 'Higdon Advanced 1 - 18 weeks',
+	'Higdon Advanced 2' = 'Higdon Advanced 2 - 18 weeks',
+	'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks' = 'Pfitzinger/Douglas: Up to 55 mi/wk - 18 weeks',
+	'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks' = 'Pfitzinger/Douglas: 55-70 mi/Wk - 18 weeks',
+	'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks' = 'Pfitzinger/Douglas: 70-85 mi/wk - 18 weeks',
+	'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks' = 'Pfitzinger/Douglas: Up to 55 mi/wk - 12 weeks',
+	'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks' = 'Pfitzinger/Douglas: 55-70 mi/wk - 12 weeks',
+	'Hansons Beginner Half Marathon' = 'Hansons Beginner Half Marathon - 18 weeks',
+	'Hansons Advanced Half Marathon' = 'Hansons Advanced Half Marathon - 18 weeks',
+	'JenReviews, 6 months' = 'JenReviews - 26 weeks',
 }
 
 export const plans = {
-	'Hansons Beginner  - 18 weeks': {
+	'Hansons Beginner - 18 weeks': {
 		length: 18,
 		name: 'Hansons Beginner',
 		workouts: [
@@ -150,7 +150,7 @@ export const plans = {
 			`race`,
 		],
 	},
-	'Hansons Advanced  - 18 weeks': {
+	'Hansons Advanced - 18 weeks': {
 		length: 18,
 		name: 'Hansons Advanced',
 		workouts: [
