@@ -20,7 +20,7 @@ export enum Plans {
 export const plans = {
 	'Hansons Beginner': {
 		length: 18,
-		name: 'Hansons Beginner',
+		name: 'Hansons Beginner- 18 weeks',
 		workouts: [
 			`rest`,
 			`2 mi`,
@@ -152,7 +152,7 @@ export const plans = {
 	},
 	'Hansons Advanced': {
 		length: 18,
-		name: 'Hansons Advanced',
+		name: 'Hansons Advanced - 18 weeks',
 		workouts: [
 			'6mi easy',
 			'6mi easy',
@@ -282,7 +282,7 @@ export const plans = {
 			'Race Day!',
 		],
 	},
-	'Higdon Novice 1': {
+	'Higdon Novice 1 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Novice 1',
 		workouts: [
@@ -414,7 +414,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Higdon Novice 2': {
+	'Higdon Novice 2 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Novice 2',
 		workouts: [
@@ -546,7 +546,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Higdon Intermediate 1': {
+	'Higdon Intermediate 1 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Intermediate 1',
 		workouts: [
@@ -678,7 +678,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Higdon Intermediate 2': {
+	'Higdon Intermediate 2 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Intermediate 2',
 		workouts: [
@@ -810,7 +810,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Higdon Advanced 1': {
+	'Higdon Advanced 1 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Advanced 1',
 		workouts: [
@@ -942,7 +942,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Higdon Advanced 2': {
+	'Higdon Advanced 2 - 18 weeks': {
 		length: 18,
 		name: 'Higdon Advanced 2',
 		workouts: [
@@ -1074,7 +1074,7 @@ export const plans = {
 			'Marathon',
 		],
 	},
-	'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks': {
+	'Pfitzinger/Douglas: Up to 55 mi/wk - 18 weeks': {
 		length: 18,
 		name: 'Pfitzinger/Douglas: Up to 55 mi/wk, 18 weeks',
 		workouts: [
@@ -1206,7 +1206,7 @@ export const plans = {
 			'Goal marathon 26.2mi',
 		],
 	},
-	'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks': {
+	'Pfitzinger/Douglas: 55-70 mi/Wk - 18 weeks': {
 		length: 18,
 		name: 'Pfitzinger/Douglas: 55-70 mi/Wk, 18 weeks',
 		workouts: [
@@ -1338,7 +1338,7 @@ export const plans = {
 			'Goal marathon 26.2mi',
 		],
 	},
-	'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks': {
+	'Pfitzinger/Douglas: 70-85 mi/wk - 18 weeks': {
 		length: 18,
 		name: 'Pfitzinger/Douglas: 70-85 mi/wk, 18 weeks',
 		workouts: [
@@ -1470,7 +1470,7 @@ export const plans = {
 			'Goal marathon 26.2mi',
 		],
 	},
-	'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks': {
+	'Pfitzinger/Douglas: Up to 55 mi/wk - 12 weeks': {
 		length: 12,
 		name: 'Pfitzinger/Douglas: Up to 55 mi/wk, 12 weeks',
 		workouts: [
@@ -1560,7 +1560,7 @@ export const plans = {
 			'Goal marathon 26.2mi',
 		],
 	},
-	'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks': {
+	'Pfitzinger/Douglas: 55-70 mi/wk - 12 weeks': {
 		length: 12,
 		name: 'Pfitzinger/Douglas: 55-70 mi/wk, 12 weeks',
 		workouts: [
@@ -1650,7 +1650,7 @@ export const plans = {
 			'Goal marathon 26.2mi',
 		],
 	},
-	'JenReviews, 6 months': {
+	'JenReviews - 26 weeks': {
 		length: 26,
 		name: 'JenReviews, 6 months',
 		workouts: [
@@ -1838,7 +1838,7 @@ export const plans = {
 			'race',
 		],
 	},
-	'Hansons Beginner Half Marathon': {
+	'Hansons Beginner Half Marathon - 18 weeks': {
 		length: 18,
 		name: 'Hansons Beginner Half Marathon',
 		workouts: [
@@ -1970,7 +1970,7 @@ export const plans = {
 			'Race Day!',
 		],
 	},
-	'Hansons Advanced Half Marathon': {
+	'Hansons Advanced Half Marathon - 18 weeks': {
 		length: 18,
 		name: 'Hansons Advanced Half Marathon',
 		workouts: [
