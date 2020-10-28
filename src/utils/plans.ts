@@ -18,9 +18,9 @@ export enum Plans {
 }
 
 export const plans = {
-	'Hansons Beginner': {
+	'Hansons Beginner  - 18 weeks': {
 		length: 18,
-		name: 'Hansons Beginner- 18 weeks',
+		name: 'Hansons Beginner',
 		workouts: [
 			`rest`,
 			`2 mi`,
@@ -150,9 +150,9 @@ export const plans = {
 			`race`,
 		],
 	},
-	'Hansons Advanced': {
+	'Hansons Advanced  - 18 weeks': {
 		length: 18,
-		name: 'Hansons Advanced - 18 weeks',
+		name: 'Hansons Advanced',
 		workouts: [
 			'6mi easy',
 			'6mi easy',
