@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "jest",
-		"build": "webpack --mode development",
+		"build": "webpack --mode production",
+		"deploy": "cp -r ./dist/ ./docs",
+		"predeploy": "npm run build",
 		"start": "webpack-dev-server --mode development"
 	},
 	"author": "Eric Willroth",
