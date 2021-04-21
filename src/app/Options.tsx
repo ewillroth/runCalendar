@@ -73,7 +73,8 @@ const Options = ({ options, setOptions, setWorkouts, workouts, direction }: Opti
 		if (e.target.value !== 'Custom') {
 			const workouts = getWorkouts(e.target.value);
 			const length = getPlanLength(e.target.value);
-			setOptions({ ...options, plan: e.target.value, length: length });
+			const newEndDate = moment(startDate).add(length, 'weeks').format();
+			setOptions({ ...options, plan: e.target.value, length: length, endDate: newEndDate });
 			setWorkouts(workouts);
 		} else {
 			setOptions({ ...options, plan: e.target.value });
