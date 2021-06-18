@@ -3,7 +3,12 @@ import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
 import { makeStyles } from '@material-ui/styles';
-import { DATE_FORMAT_OPTIONS, getWorkouts, getPlanLength, editWorkoutsLength } from '../utils/utils';
+import {
+	DATE_FORMAT_OPTIONS,
+	getWorkouts,
+	getPlanLength,
+	editWorkoutsLength,
+} from '../utils/utils';
 import { plans } from '../utils/plans';
 
 export interface IOptions {
@@ -34,7 +39,13 @@ const useStyles = makeStyles({
 	},
 });
 
-const Options = ({ options, setOptions, setWorkouts, workouts, direction }: OptionsProps) => {
+const Options = ({
+	options,
+	setOptions,
+	setWorkouts,
+	workouts,
+	direction,
+}: OptionsProps) => {
 	const { calendarName, startDate, endDate, length, plan } = options;
 
 	const [name, setName] = useState(calendarName);
@@ -55,26 +66,60 @@ const Options = ({ options, setOptions, setWorkouts, workouts, direction }: Opti
 	const handleLengthChange = (e: any) => {
 		let newLength = e.target.value;
 		if (e.target.value > 52) newLength = 52;
-		const newEndDate = moment(startDate).add(newLength, 'weeks').format();
-		setWorkouts(editWorkoutsLength(workouts, workouts.length, newLength * 7));
-		setOptions({ ...options, plan: 'Custom', length: newLength, endDate: newEndDate });
+		const newEndDate = moment(startDate)
+			.add(newLength, 'weeks')
+			.subtract(1, 'days')
+			.format();
+		setWorkouts(
+			editWorkoutsLength(workouts, workouts.length, newLength * 7)
+		);
+		setOptions({
+			...options,
+			plan: 'Custom',
+			length: newLength,
+			endDate: newEndDate,
+		});
 	};
 	const handleStartDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
-		const newEndDate = moment(date).add(length, 'weeks').format();
-		setOptions({ ...options, startDate: formattedDate, endDate: newEndDate });
+		const newEndDate = moment(date)
+			.add(length, 'weeks')
+			.subtract(1, 'days')
+			.format();
+		setOptions({
+			...options,
+			startDate: formattedDate,
+			endDate: newEndDate,
+		});
 	};
 	const handleEndDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
-		const newStartDate = moment(date).subtract(length, 'weeks').format();
-		setOptions({ ...options, startDate: newStartDate, endDate: formattedDate });
+		console.log(endDate);
+		const newStartDate = moment(date)
+			.subtract(length, 'weeks')
+			.add(1, 'days')
+			.format();
+		console.log(newStartDate);
+		setOptions({
+			...options,
+			startDate: newStartDate,
+			endDate: formattedDate,
+		});
 	};
 	const handlePlanChange = (e: any) => {
 		if (e.target.value !== 'Custom') {
 			const workouts = getWorkouts(e.target.value);
 			const length = getPlanLength(e.target.value);
-			const newEndDate = moment(startDate).add(length, 'weeks').format();
-			setOptions({ ...options, plan: e.target.value, length: length, endDate: newEndDate });
+			const newEndDate = moment(startDate)
+				.add(length, 'weeks')
+				.subtract(1, 'days')
+				.format();
+			setOptions({
+				...options,
+				plan: e.target.value,
+				length: length,
+				endDate: newEndDate,
+			});
 			setWorkouts(workouts);
 		} else {
 			setOptions({ ...options, plan: e.target.value });
@@ -82,37 +127,63 @@ const Options = ({ options, setOptions, setWorkouts, workouts, direction }: Opti
 	};
 
 	return (
-		<Grid className={classes.options} container spacing={2} direction={direction} justify='center' alignItems='flex-start'>
+		<Grid
+			className={classes.options}
+			container
+			spacing={2}
+			direction={direction}
+			justify="center"
+			alignItems="flex-start"
+		>
 			<Grid item>
-				<TextField size='medium' label='Calendar Name' value={name} onChange={handleNameChange} onBlur={handleNameBlur} />
+				<TextField
+					size="medium"
+					label="Calendar Name"
+					value={name}
+					onChange={handleNameChange}
+					onBlur={handleNameBlur}
+				/>
 			</Grid>
 			<Grid item>
 				<DatePicker
 					className={classes.dateInput}
-					label='Start Date'
+					label="Start Date"
 					format={DATE_FORMAT_OPTIONS}
 					autoOk
 					disableToolbar
-					variant='inline'
+					variant="inline"
 					onChange={handleStartDateChange}
-					value={startDate}></DatePicker>
+					value={startDate}
+				></DatePicker>
 			</Grid>
 			<Grid item>
 				<DatePicker
 					className={classes.dateInput}
-					label='End Date'
+					label="End Date"
 					format={DATE_FORMAT_OPTIONS}
 					autoOk
 					disableToolbar
-					variant='inline'
+					variant="inline"
 					onChange={handleEndDateChange}
-					value={endDate}></DatePicker>
+					value={endDate}
+				></DatePicker>
 			</Grid>
 			<Grid item>
-				<TextField className={classes.lengthInput} size='medium' label='Weeks' value={length} onChange={handleLengthChange} />
+				<TextField
+					className={classes.lengthInput}
+					size="medium"
+					label="Weeks"
+					value={length}
+					onChange={handleLengthChange}
+				/>
 			</Grid>
 			<Grid item>
-				<TextField label='Plan' value={plan} onChange={handlePlanChange} select>
+				<TextField
+					label="Plan"
+					value={plan}
+					onChange={handlePlanChange}
+					select
+				>
 					{Object.keys(plans).map((plan) => {
 						return (
 							<MenuItem key={plan} value={plan}>
@@ -120,7 +191,7 @@ const Options = ({ options, setOptions, setWorkouts, workouts, direction }: Opti
 							</MenuItem>
 						);
 					})}
-					<MenuItem value='Custom'>Custom</MenuItem>
+					<MenuItem value="Custom">Custom</MenuItem>
 				</TextField>
 			</Grid>
 		</Grid>

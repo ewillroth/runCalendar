@@ -3,7 +3,14 @@ import React, { useState } from 'react';
 import { saveAs } from 'file-saver';
 import moment from 'moment';
 import MomentUtils from '@date-io/moment';
-import { Grid, Button, AppBar, Hidden, Menu, IconButton } from '@material-ui/core';
+import {
+	Grid,
+	Button,
+	AppBar,
+	Hidden,
+	Menu,
+	IconButton,
+} from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -34,8 +41,10 @@ const App = () => {
 
 	const handleClick = () => {
 		const events = [];
-		for (let i = 0; i < workouts.length; i++) {
-			const date = moment(options.startDate).add(i, 'd').format(DATE_FORMAT_EVENT);
+		for (let i = 0; i < workouts.length - 1; i++) {
+			const date = moment(options.startDate)
+				.add(i, 'd')
+				.format(DATE_FORMAT_EVENT);
 			const begin = `BEGIN:VEVENT\n`;
 			const summary = `SUMMARY:${workouts[i]}\n`;
 			const dtStart = `DTSTART:${date}\n`;
@@ -46,7 +55,9 @@ const App = () => {
 		const start = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:+//runcalendar.app//runcalendar 2.0\nNAME:${options.calendarName}\nX-WR-CALNAME:${options.calendarName}\n`;
 		const end = `END:VCALENDAR`;
 
-		var blob = new Blob([start, events.join(''), end], { type: 'text/calendar;charset=utf-8;' });
+		var blob = new Blob([start, events.join(''), end], {
+			type: 'text/calendar;charset=utf-8;',
+		});
 		saveAs(blob, `${options.calendarName}.ics`);
 	};
 
@@ -62,15 +73,39 @@ const App = () => {
 
 	return (
 		<MuiPickersUtilsProvider utils={MomentUtils}>
-			<Grid container direction='column' justify='center' alignItems='center'>
+			<Grid
+				container
+				direction="column"
+				justify="center"
+				alignItems="center"
+			>
 				<Hidden smDown>
-					<AppBar color='default'>
-						<Grid className='desktopNav' container spacing={10} direction='row' justify='center' alignItems='center'>
+					<AppBar color="default">
+						<Grid
+							className="desktopNav"
+							container
+							spacing={10}
+							direction="row"
+							justify="center"
+							alignItems="center"
+						>
 							<Grid item>
-								<Options direction='row' options={options} setOptions={setOptions} setWorkouts={setWorkouts} workouts={workouts} />
+								<Options
+									direction="row"
+									options={options}
+									setOptions={setOptions}
+									setWorkouts={setWorkouts}
+									workouts={workouts}
+								/>
 							</Grid>
 							<Grid item>
-								<Button onClick={handleClick} size='small' color='primary' variant='contained' disableElevation>
+								<Button
+									onClick={handleClick}
+									size="small"
+									color="primary"
+									variant="contained"
+									disableElevation
+								>
 									Download
 								</Button>
 							</Grid>
@@ -78,27 +113,58 @@ const App = () => {
 					</AppBar>
 				</Hidden>
 				<Hidden mdUp>
-					<AppBar color='default'>
-						<Grid container justify='space-between' alignItems='center'>
-							<IconButton aria-label='more' aria-controls='long-menu' aria-haspopup='true' onClick={toggleMenu}>
+					<AppBar color="default">
+						<Grid
+							container
+							justify="space-between"
+							alignItems="center"
+						>
+							<IconButton
+								aria-label="more"
+								aria-controls="long-menu"
+								aria-haspopup="true"
+								onClick={toggleMenu}
+							>
 								<MoreVertIcon />
 							</IconButton>
 
-							<Menu open={Boolean(anchorEl)} anchorEl={anchorEl} onClose={handleClose}>
+							<Menu
+								open={Boolean(anchorEl)}
+								anchorEl={anchorEl}
+								onClose={handleClose}
+							>
 								{anchorEl && (
 									<IconButton className={classes.cancelIcon}>
 										<CancelIcon onClick={handleClose} />
 									</IconButton>
 								)}
-								<Options direction='column' options={options} setOptions={setOptions} setWorkouts={setWorkouts} workouts={workouts} />
+								<Options
+									direction="column"
+									options={options}
+									setOptions={setOptions}
+									setWorkouts={setWorkouts}
+									workouts={workouts}
+								/>
 							</Menu>
-							<Button onClick={handleClick} size='small' color='primary' variant='contained' disableElevation>
+							<Button
+								onClick={handleClick}
+								size="small"
+								color="primary"
+								variant="contained"
+								disableElevation
+							>
 								Download
 							</Button>
 						</Grid>
 					</AppBar>
 				</Hidden>
-				<Calendar setOptions={setOptions} options={options} setWorkouts={setWorkouts} workouts={workouts} startDate={options.startDate} />
+				<Calendar
+					setOptions={setOptions}
+					options={options}
+					setWorkouts={setWorkouts}
+					workouts={workouts}
+					startDate={options.startDate}
+				/>
 			</Grid>
 		</MuiPickersUtilsProvider>
 	);
