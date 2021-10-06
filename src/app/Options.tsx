@@ -91,6 +91,7 @@ const Options = ({
 		});
 	};
 
+<<<<<<< HEAD
 	const handleKeyDown = (e: KeyboardEvent) => {
 		switch (e.key) {
 			case 'Enter':
@@ -98,6 +99,8 @@ const Options = ({
 		}
 	};
 
+=======
+>>>>>>> 61becb050b4df58a50a94e030a20c9948ea62936
 	const handleStartDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		const newEndDate = moment(date)
@@ -110,6 +113,7 @@ const Options = ({
 			endDate: newEndDate,
 		});
 	};
+
 	const handleEndDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		console.log(endDate);
@@ -124,19 +128,20 @@ const Options = ({
 			endDate: formattedDate,
 		});
 	};
+
 	const handlePlanChange = (e: any) => {
 		if (e.target.value !== 'Custom') {
 			const workouts = getWorkouts(e.target.value);
 			const length = getPlanLength(e.target.value);
-			const newEndDate = moment(startDate)
-				.add(length, 'weeks')
-				.subtract(1, 'days')
+			const newStartDate = moment(endDate)
+				.subtract(length, 'weeks')
+				.add(1, 'days')
 				.format();
 			setOptions({
 				...options,
 				plan: e.target.value,
 				length: length,
-				endDate: newEndDate,
+				startDate: newStartDate,
 			});
 			setWorkouts(workouts);
 		} else {
