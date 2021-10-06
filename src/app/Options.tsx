@@ -1,4 +1,4 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react';
+import React, { useState, useEffect, KeyboardEvent } from 'react';
 import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
