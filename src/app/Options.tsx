@@ -91,7 +91,6 @@ const Options = ({
 		});
 	};
 
-<<<<<<< HEAD
 	const handleKeyDown = (e: KeyboardEvent) => {
 		switch (e.key) {
 			case 'Enter':
@@ -99,8 +98,6 @@ const Options = ({
 		}
 	};
 
-=======
->>>>>>> 61becb050b4df58a50a94e030a20c9948ea62936
 	const handleStartDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		const newEndDate = moment(date)
