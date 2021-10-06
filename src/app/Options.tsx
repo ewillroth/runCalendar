@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, SyntheticEvent } from 'react';
 import moment from 'moment';
 import { Grid, TextField, MenuItem } from '@material-ui/core';
 import { DatePicker } from '@material-ui/pickers';
@@ -49,6 +49,11 @@ const Options = ({
 	const { calendarName, startDate, endDate, length, plan } = options;
 
 	const [name, setName] = useState(calendarName);
+	const [displayLength, setDisplayLength] = useState(length);
+
+	useEffect(() => {
+		setDisplayLength(length);
+	}, [length]);
 
 	const classes = useStyles();
 
@@ -63,23 +68,36 @@ const Options = ({
 	const handleNameBlur = (e: any) => {
 		setOptions({ ...options, calendarName: e.target.value });
 	};
+
 	const handleLengthChange = (e: any) => {
 		let newLength = e.target.value;
 		if (e.target.value > 52) newLength = 52;
-		const newEndDate = moment(startDate)
-			.add(newLength, 'weeks')
-			.subtract(1, 'days')
+		setDisplayLength(newLength);
+	};
+
+	const handleLengthBlur = () => {
+		const newStartDate = moment(endDate)
+			.subtract(displayLength, 'weeks')
+			.add(1, 'days')
 			.format();
 		setWorkouts(
-			editWorkoutsLength(workouts, workouts.length, newLength * 7)
+			editWorkoutsLength(workouts, workouts.length, displayLength * 7)
 		);
 		setOptions({
 			...options,
 			plan: 'Custom',
-			length: newLength,
-			endDate: newEndDate,
+			length: displayLength,
+			startDate: newStartDate,
 		});
 	};
+
+	const handleKeyDown = (e: KeyboardEvent) => {
+		switch (e.key) {
+			case 'Enter':
+				e.target && (e.target as HTMLElement).blur();
+		}
+	};
+
 	const handleStartDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		const newEndDate = moment(date)
@@ -173,8 +191,10 @@ const Options = ({
 					className={classes.lengthInput}
 					size="medium"
 					label="Weeks"
-					value={length}
+					value={displayLength}
 					onChange={handleLengthChange}
+					onBlur={handleLengthBlur}
+					onKeyDown={handleKeyDown}
 				/>
 			</Grid>
 			<Grid item>
