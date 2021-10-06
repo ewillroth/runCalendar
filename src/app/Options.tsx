@@ -63,6 +63,7 @@ const Options = ({
 	const handleNameBlur = (e: any) => {
 		setOptions({ ...options, calendarName: e.target.value });
 	};
+
 	const handleLengthChange = (e: any) => {
 		let newLength = e.target.value;
 		if (e.target.value > 52) newLength = 52;
@@ -80,6 +81,7 @@ const Options = ({
 			endDate: newEndDate,
 		});
 	};
+
 	const handleStartDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		const newEndDate = moment(date)
@@ -92,6 +94,7 @@ const Options = ({
 			endDate: newEndDate,
 		});
 	};
+
 	const handleEndDateChange = (date: any) => {
 		const formattedDate = moment(date).format();
 		console.log(endDate);
@@ -106,19 +109,20 @@ const Options = ({
 			endDate: formattedDate,
 		});
 	};
+
 	const handlePlanChange = (e: any) => {
 		if (e.target.value !== 'Custom') {
 			const workouts = getWorkouts(e.target.value);
 			const length = getPlanLength(e.target.value);
-			const newEndDate = moment(startDate)
-				.add(length, 'weeks')
-				.subtract(1, 'days')
+			const newStartDate = moment(endDate)
+				.subtract(length, 'weeks')
+				.add(1, 'days')
 				.format();
 			setOptions({
 				...options,
 				plan: e.target.value,
 				length: length,
-				endDate: newEndDate,
+				startDate: newStartDate,
 			});
 			setWorkouts(workouts);
 		} else {
