@@ -91,7 +91,7 @@ const Options = ({
 		});
 	};
 
-	const handleKeyDown = (e: KeyboardEvent) => {
+	const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
 		switch (e.key) {
 			case 'Enter':
 				e.target && (e.target as HTMLElement).blur();
