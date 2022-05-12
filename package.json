@@ -22,7 +22,7 @@
 		"@material-ui/styles": "^4.9.10",
 		"blob-polyfill": "^4.0.20190430",
 		"file-saver": "^2.0.2",
-		"moment": "^2.24.0",
+		"moment": "^2.29.2",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
 		"react-hot-loader": "^4.12.20"
