@@ -10,6 +10,7 @@ import {
   Hidden,
   Menu,
   IconButton,
+  Box,
 } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -76,7 +77,7 @@ const App = () => {
   return (
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Grid container direction="column" justify="center" alignItems="center">
-        <Hidden smDown>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <AppBar color="default">
             <Grid
               className="desktopNav"
@@ -108,8 +109,8 @@ const App = () => {
               </Grid>
             </Grid>
           </AppBar>
-        </Hidden>
-        <Hidden mdUp>
+        </Box>
+        <Box sx={{ display: { xs: "block", md: "none" } }}>
           <AppBar color="default">
             <Grid container justify="space-between" alignItems="center">
               <IconButton
@@ -150,7 +151,7 @@ const App = () => {
               </Button>
             </Grid>
           </AppBar>
-        </Hidden>
+        </Box>
         <Calendar
           setOptions={setOptions}
           options={options}
