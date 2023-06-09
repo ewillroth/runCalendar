@@ -35,6 +35,7 @@ const App = () => {
     endDate: moment().format(),
     length: 0,
     plan: "Custom",
+    format: "ics",
   });
   const [workouts, setWorkouts] = useState<string[]>([]);
 
@@ -64,6 +65,22 @@ const App = () => {
     saveAs(blob, `${options.calendarName}.ics`);
   };
 
+  const handleCsvClick = () => {
+    const csv = workouts
+      .map((workout, index) => {
+        if ((index + 1) % 7 === 0) {
+          return workout + ",\n";
+        } else {
+          return workout + ",";
+        }
+      })
+      .join("");
+    var blob = new Blob([csv], {
+      type: "text/csv;charset=utf-8;",
+    });
+    saveAs(blob, `${options.calendarName}.csv`);
+  };
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const toggleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -82,9 +99,9 @@ const App = () => {
             <Grid
               className="desktopNav"
               container
-              spacing={10}
+              spacing={4}
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <Grid item>
@@ -98,7 +115,9 @@ const App = () => {
               </Grid>
               <Grid item>
                 <Button
-                  onClick={handleClick}
+                  onClick={
+                    options.format === "ics" ? handleClick : handleCsvClick
+                  }
                   size="small"
                   color="primary"
                   variant="contained"
@@ -112,7 +131,7 @@ const App = () => {
         </Box>
         <Box sx={{ display: { xs: "block", md: "none" } }}>
           <AppBar color="default">
-            <Grid container justify="space-between" alignItems="center">
+            <Grid container justifyContent="space-between" alignItems="center">
               <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
@@ -146,6 +165,7 @@ const App = () => {
                 color="primary"
                 variant="contained"
                 disableElevation
+                style={{ marginRight: "4px" }}
               >
                 Download
               </Button>
