@@ -7,6 +7,8 @@ describe('Options', () => {
 		const mockFn = jest.fn();
 		const { baseElement } = render(
 			<Options
+				toggleTheme={mockFn}
+				theme={{ palette: { type: 'light' } }}
 				options={{
 					calendarName: '',
 					startDate: '',

@@ -7,9 +7,9 @@ import {
   Grid,
   Button,
   AppBar,
-  Hidden,
   Menu,
   IconButton,
+	Box,
 } from "@material-ui/core";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
@@ -18,6 +18,21 @@ import { makeStyles } from "@material-ui/styles";
 import Calendar from "./Calendar";
 import Options, { IOptions } from "./Options";
 import { DATE_FORMAT_EVENT } from "../utils/utils";
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
+
+// Define light and dark themes
+export const lightTheme = createTheme({
+  palette: {
+    type: 'light',
+  },
+});
+
+export const darkTheme = createTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 const useStyles = makeStyles({
   cancelIcon: {
@@ -27,7 +42,20 @@ const useStyles = makeStyles({
   },
 });
 
+
 const App = () => {
+  // Create a state variable for the current theme
+  const [theme, setTheme] = useState(lightTheme);
+
+  // Function to toggle between light and dark mode
+  const toggleTheme = () => {
+    if (theme === lightTheme) {
+      setTheme(darkTheme);
+    } else {
+      setTheme(lightTheme);
+    }
+  };
+
   const [options, setOptions] = useState<IOptions>({
     calendarName: "New Calendar",
     startDate: moment().format(),
@@ -42,8 +70,6 @@ const App = () => {
   const handleClick = () => {
     const events = [];
     for (let i = 0; i < workouts.length - 1; i++) {
-      console.log(workouts[i]);
-      console.log(workouts[i].length);
       const date = moment(options.startDate)
         .add(i, "d")
         .format(DATE_FORMAT_EVENT);
@@ -74,16 +100,19 @@ const App = () => {
   };
 
   return (
+	<ThemeProvider theme={theme}>
+		<CssBaseline />
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <Grid container direction="column" justify="center" alignItems="center">
-        <Hidden smDown>
-          <AppBar color="default">
+			<Box  sx={{ display: { xl: 'none', lg: 'none', md: 'none', sm: 'block', xs: 'block' } }}>
+          <AppBar color="default" >
+					<>hello</>
             <Grid
               className="desktopNav"
               container
               spacing={10}
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
             >
               <Grid item>
@@ -93,6 +122,8 @@ const App = () => {
                   setOptions={setOptions}
                   setWorkouts={setWorkouts}
                   workouts={workouts}
+									toggleTheme={toggleTheme}
+									theme={theme}
                 />
               </Grid>
               <Grid item>
@@ -108,10 +139,10 @@ const App = () => {
               </Grid>
             </Grid>
           </AppBar>
-        </Hidden>
-        <Hidden mdUp>
-          <AppBar color="default">
-            <Grid container justify="space-between" alignItems="center">
+					</Box>
+					<Box	sx={{ display: { xl: 'block', lg: 'block', md: 'block', sm: 'none', xs: 'none' } }}>
+          <AppBar color="default" >
+            <Grid container justifyContent="space-between" alignItems="center">
               <IconButton
                 aria-label="more"
                 aria-controls="long-menu"
@@ -137,6 +168,8 @@ const App = () => {
                   setOptions={setOptions}
                   setWorkouts={setWorkouts}
                   workouts={workouts}
+									toggleTheme={toggleTheme}
+									theme={theme}
                 />
               </Menu>
               <Button
@@ -150,7 +183,7 @@ const App = () => {
               </Button>
             </Grid>
           </AppBar>
-        </Hidden>
+					</Box>
         <Calendar
           setOptions={setOptions}
           options={options}
@@ -160,6 +193,7 @@ const App = () => {
         />
       </Grid>
     </MuiPickersUtilsProvider>
+		</ThemeProvider>
   );
 };
 
