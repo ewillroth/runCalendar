@@ -1,6 +1,6 @@
-import React from 'react';
-import { render } from '../../../test-utils';
-import Options from '../Options';
+import React from "react";
+import { render } from "../../../test-utils";
+import Options from "../Options";
 
 describe('Options', () => {
 	it('renders', () => {
