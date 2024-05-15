@@ -1,44 +1,52 @@
-import React, { useState, useEffect, KeyboardEvent } from "react";
-import moment from "moment";
-import { Grid, TextField, MenuItem } from "@material-ui/core";
-import { DatePicker } from "@material-ui/pickers";
-import { makeStyles } from "@material-ui/styles";
+import React, { useState, useEffect, KeyboardEvent } from 'react'
+import moment from 'moment'
+import {
+  Grid,
+  TextField,
+  MenuItem,
+  Switch,
+  FormControlLabel
+} from '@material-ui/core'
+import { DatePicker } from '@material-ui/pickers'
+import { makeStyles } from '@material-ui/styles'
 import {
   DATE_FORMAT_OPTIONS,
   getWorkouts,
   getPlanLength,
-  editWorkoutsLength,
-} from "../utils/utils";
-import { plans } from "../utils/plans";
+  editWorkoutsLength
+} from '../utils/utils'
+import { plans } from '../utils/plans'
+import { lightTheme } from './App'
 
 export interface IOptions {
-  calendarName: string;
-  startDate: string;
-  endDate: string;
-  length: number;
-  plan: string;
-  format: "ics" | "csv";
+  calendarName: string
+  startDate: string
+  endDate: string
+  length: number
+  plan: string
 }
 
 export interface OptionsProps {
-  options: IOptions;
-  setOptions: React.Dispatch<React.SetStateAction<IOptions>>;
-  setWorkouts: React.Dispatch<React.SetStateAction<string[]>>;
-  workouts: string[];
-  direction: "row" | "column";
+  options: IOptions
+  setOptions: React.Dispatch<React.SetStateAction<IOptions>>
+  setWorkouts: React.Dispatch<React.SetStateAction<string[]>>
+  workouts: string[]
+  direction: 'row' | 'column'
+  toggleTheme: () => void
+  theme: any
 }
 
 const useStyles = makeStyles({
   options: {
-    margin: "10px",
+    margin: '10px'
   },
   lengthInput: {
-    width: "50px",
+    width: '50px'
   },
   dateInput: {
-    width: "140px",
-  },
-});
+    width: '140px'
+  }
+})
 
 const Options = ({
   options,
@@ -46,110 +54,106 @@ const Options = ({
   setWorkouts,
   workouts,
   direction,
+  toggleTheme,
+  theme
 }: OptionsProps) => {
-  const { calendarName, startDate, endDate, length, plan, format } = options;
+  const { calendarName, startDate, endDate, length, plan } = options
 
-  const [name, setName] = useState(calendarName);
-  const [displayLength, setDisplayLength] = useState(length);
-
-  useEffect(() => {
-    setDisplayLength(length);
-  }, [length]);
-
-  const classes = useStyles();
+  const [name, setName] = useState(calendarName)
+  const [displayLength, setDisplayLength] = useState(length)
 
   useEffect(() => {
-    setName(calendarName);
-  }, [calendarName]);
+    setDisplayLength(length)
+  }, [length])
+
+  const classes = useStyles()
+
+  useEffect(() => {
+    setName(calendarName)
+  }, [calendarName])
 
   const handleNameChange = (e: any) => {
-    setName(e.target.value);
-  };
+    setName(e.target.value)
+  }
 
   const handleNameBlur = (e: any) => {
-    setOptions({ ...options, calendarName: e.target.value });
-  };
+    setOptions({ ...options, calendarName: e.target.value })
+  }
 
   const handleLengthChange = (e: any) => {
-    let newLength = e.target.value;
-    if (e.target.value > 52) newLength = 52;
-    setDisplayLength(newLength);
-  };
+    let newLength = e.target.value
+    if (e.target.value > 52) newLength = 52
+    setDisplayLength(newLength)
+  }
 
   const handleLengthBlur = () => {
     const newStartDate = moment(endDate)
-      .subtract(displayLength, "weeks")
-      .add(1, "days")
-      .format();
+      .subtract(displayLength, 'weeks')
+      .add(1, 'days')
+      .format()
     setWorkouts(
       editWorkoutsLength(workouts, workouts.length, displayLength * 7)
-    );
+    )
     setOptions({
       ...options,
-      plan: "Custom",
+      plan: 'Custom',
       length: displayLength,
-      startDate: newStartDate,
-    });
-  };
+      startDate: newStartDate
+    })
+  }
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
-      case "Enter":
-        e.target && (e.target as HTMLElement).blur();
+      case 'Enter':
+        e.target && (e.target as HTMLElement).blur()
     }
-  };
+  }
 
   const handleStartDateChange = (date: any) => {
-    const formattedDate = moment(date).format();
+    const formattedDate = moment(date).format()
     const newEndDate = moment(date)
-      .add(length, "weeks")
-      .subtract(1, "days")
-      .format();
+      .add(length, 'weeks')
+      .subtract(1, 'days')
+      .format()
     setOptions({
       ...options,
       startDate: formattedDate,
-      endDate: newEndDate,
-    });
-  };
+      endDate: newEndDate
+    })
+  }
 
   const handleEndDateChange = (date: any) => {
-    const formattedDate = moment(date).format();
-    console.log(endDate);
+    const formattedDate = moment(date).format()
     const newStartDate = moment(date)
-      .subtract(length, "weeks")
-      .add(1, "days")
-      .format();
-    console.log(newStartDate);
+      .subtract(length, 'weeks')
+      .add(1, 'days')
+      .format()
     setOptions({
       ...options,
       startDate: newStartDate,
-      endDate: formattedDate,
-    });
-  };
+      endDate: formattedDate
+    })
+  }
 
   const handlePlanChange = (e: any) => {
-    if (e.target.value !== "Custom") {
-      const workouts = getWorkouts(e.target.value);
-      const length = getPlanLength(e.target.value);
+    if (e.target.value !== 'Custom') {
+      const workouts = getWorkouts(e.target.value)
+      const length = getPlanLength(e.target.value)
       const newStartDate = moment(endDate)
-        .subtract(length, "weeks")
-        .add(1, "days")
-        .format();
+        .subtract(length, 'weeks')
+        .add(1, 'days')
+        .format()
       setOptions({
         ...options,
         plan: e.target.value,
         length: length,
-        startDate: newStartDate,
-      });
-      setWorkouts(workouts);
+        startDate: newStartDate
+      })
+      setWorkouts(workouts)
     } else {
-      setOptions({ ...options, plan: e.target.value });
+      setOptions({ ...options, plan: e.target.value })
     }
-  };
-
-  const handleFormatChange = (e: any) => {
-    setOptions({ ...options, format: e.target.value });
-  };
+  }
 
   return (
     <Grid
@@ -157,13 +161,13 @@ const Options = ({
       container
       spacing={2}
       direction={direction}
-      justifyContent="center"
-      alignItems="flex-start"
+      justifyContent='center'
+      alignItems='flex-start'
     >
       <Grid item>
         <TextField
-          size="medium"
-          label="File Name"
+          size='medium'
+          label='Calendar Name'
           value={name}
           onChange={handleNameChange}
           onBlur={handleNameBlur}
@@ -172,11 +176,11 @@ const Options = ({
       <Grid item>
         <DatePicker
           className={classes.dateInput}
-          label="Start Date"
+          label='Start Date'
           format={DATE_FORMAT_OPTIONS}
           autoOk
           disableToolbar
-          variant="inline"
+          variant='inline'
           onChange={handleStartDateChange}
           value={startDate}
         ></DatePicker>
@@ -184,11 +188,11 @@ const Options = ({
       <Grid item>
         <DatePicker
           className={classes.dateInput}
-          label="End Date"
+          label='End Date'
           format={DATE_FORMAT_OPTIONS}
           autoOk
           disableToolbar
-          variant="inline"
+          variant='inline'
           onChange={handleEndDateChange}
           value={endDate}
         ></DatePicker>
@@ -196,8 +200,8 @@ const Options = ({
       <Grid item>
         <TextField
           className={classes.lengthInput}
-          size="medium"
-          label="Weeks"
+          size='medium'
+          label='Weeks'
           value={displayLength}
           onChange={handleLengthChange}
           onBlur={handleLengthBlur}
@@ -205,30 +209,27 @@ const Options = ({
         />
       </Grid>
       <Grid item>
-        <TextField label="Plan" value={plan} onChange={handlePlanChange} select>
+        <TextField label='Plan' value={plan} onChange={handlePlanChange} select>
           {Object.keys(plans).map((plan) => {
             return (
               <MenuItem key={plan} value={plan}>
                 {plan}
               </MenuItem>
-            );
+            )
           })}
-          <MenuItem value="Custom">Custom</MenuItem>
+          <MenuItem value='Custom'>Custom</MenuItem>
         </TextField>
       </Grid>
       <Grid item>
-        <TextField
-          label="Format"
-          value={format}
-          onChange={handleFormatChange}
-          select
-        >
-          <MenuItem value="ics">ICS</MenuItem>
-          <MenuItem value="csv">CSV</MenuItem>
-        </TextField>
+        <FormControlLabel
+          control={
+            <Switch checked={theme === lightTheme} onChange={toggleTheme} />
+          }
+          label={theme === lightTheme ? 'Light' : 'Dark'}
+        />
       </Grid>
     </Grid>
-  );
-};
+  )
+}
 
-export default Options;
+export default Options
